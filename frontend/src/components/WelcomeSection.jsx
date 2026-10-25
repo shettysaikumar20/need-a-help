@@ -34,7 +34,7 @@ export default function WelcomeSection({ onSendMessage, isLocalMode }) {
         <h2 className="welcome-heading">How can I help you today?</h2>
         <p className="welcome-subtext">
           {isLocalMode 
-            ? 'Running locally with Gemma 3 (270M) via Ollama — fully offline and private.'
+            ? 'Running locally with Gemma 4 (E2B) via Ollama — fully offline and private.'
             : 'Powered by Google Gemini with resilient auto-failover to Backboard and OpenRouter.'}
         </p>
       </div>

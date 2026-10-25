@@ -264,7 +264,7 @@ app.post('/api/local-chat', async (req, res, next) => {
     return res.status(503).json({
       success: false,
       error: 'Service Unavailable',
-      message: 'Local AI is unavailable. Make sure Ollama is running and gemma3:270m is installed.'
+      message: 'Local AI is unavailable. Make sure Ollama is running and gemma4:e2b is installed.'
     });
   }
 });

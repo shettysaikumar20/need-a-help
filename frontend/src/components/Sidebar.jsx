@@ -86,7 +86,7 @@ export default function Sidebar({
             {isOnline 
               ? 'Gemini 2.5 Flash (Auto-failover enabled)' 
               : localStatus.available 
-                ? 'Gemma 3 270M (Ready)' 
+                ? 'Gemma 4 E2B (Ready)' 
                 : 'Ollama not detected'}
           </p>
         </div>

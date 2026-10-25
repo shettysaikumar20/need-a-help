@@ -208,7 +208,7 @@ export default function ChatInterface({
               ref={textareaRef}
               rows={1}
               className="chatgpt-textarea"
-              placeholder={isLocalMode ? "Message Need A Help (Offline Gemma 3)..." : "Message Need A Help (Online Gemini)..."}
+              placeholder={isLocalMode ? "Message Need A Help (Offline Gemma 4 E2B)..." : "Message Need A Help (Online Gemini)..."}
               value={inputText}
               onChange={(e) => setInputText(e.target.value)}
               onKeyDown={handleKeyDown}

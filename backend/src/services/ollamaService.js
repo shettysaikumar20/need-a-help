@@ -15,7 +15,7 @@ function getOllamaModel() {
   return process.env.OLLAMA_MODEL || DEFAULT_OLLAMA_MODEL;
 }
 
-const LOCAL_SYSTEM_PROMPT = `You are Need A Help, an intelligent and helpful AI assistant running locally on your device via Ollama (Gemma 3).
+const LOCAL_SYSTEM_PROMPT = `You are Need A Help, an intelligent and helpful AI assistant running locally on your device via Ollama (Gemma 4 E2B).
 Be helpful, direct, concise, and clear. Use formatted markdown, lists, and code blocks whenever appropriate.`;
 
 /**

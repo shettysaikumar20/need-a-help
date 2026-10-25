@@ -13,7 +13,7 @@ A clean, modern, and distraction-free AI conversational web application modeled 
   2. **Secondary Fallback**: **Backboard API** (automatically activates if Gemini credits end or errors occur).
   3. **Tertiary Fallback**: **OpenRouter API** (resilient failover ensures the app never stops answering).
 - 💻 **Offline Local AI**:
-  - Powered by **Gemma 3 270M** running locally on your machine via [Ollama](https://ollama.ai).
+  - Powered by **Gemma 4 E2B** (`gemma4:e2b`) running locally on your machine via [Ollama](https://ollama.ai).
   - 100% private, zero internet connection required, zero cloud API costs.
 - 📋 **Syntax-Highlighted Code Blocks**: Formatted code rendering with language detection and a 1-click **Copy code** button.
 - 📐 **LaTeX Math Support**: Mathematical equations rendered with KaTeX.
@@ -47,7 +47,7 @@ A clean, modern, and distraction-free AI conversational web application modeled 
             |                                                +-------------------------+
     1. Google Gemini API                                     | Local Ollama Server     |
        (gemini-2.5-flash / gemma)                            | (http://127.0.0.1:11434)|
-            | (failover)                                     | Model: gemma3:270m      |
+            | (failover)                                     | Model: gemma4:e2b       |
     2. Backboard AI                                          +-------------------------+
             | (failover)                                                  |
     3. OpenRouter API                                              [ 100% On-Device, ]
@@ -64,7 +64,7 @@ A clean, modern, and distraction-free AI conversational web application modeled 
   - Google Gemini API (`gemini-2.5-flash`, Google AI Studio)
   - Backboard AI
   - OpenRouter API
-  - Ollama (Local open-weight `gemma3:270m`)
+  - Ollama (Local open-weight `gemma4:e2b`)
 
 ---
 
@@ -76,7 +76,7 @@ A clean, modern, and distraction-free AI conversational web application modeled 
 
 ### 2. Clone the Repository
 ```bash
-git clone https://github.com/YOUR_USERNAME/need-a-help.git
+git clone https://github.com/shettysaikumar20/need-a-help.git
 cd need-a-help
 ```
 
@@ -98,16 +98,16 @@ OPENROUTER_API_KEY=your_openrouter_api_key_here
 
 # Local Offline AI
 OLLAMA_URL=http://127.0.0.1:11434
-OLLAMA_MODEL=gemma3:270m
+OLLAMA_MODEL=gemma4:e2b
 
 PORT=5000
 NODE_ENV=development
 ```
 
 ### 4. Setup Local Offline AI (Optional for Offline Mode)
-Download and run `gemma3:270m` in Ollama:
+Download and run `gemma4:e2b` in Ollama:
 ```bash
-ollama run gemma3:270m
+ollama run gemma4:e2b
 ```
 
 ### 5. Install Dependencies & Run Locally

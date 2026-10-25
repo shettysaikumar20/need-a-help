@@ -73,7 +73,7 @@ export default function App() {
           setLocalStatus({
             available: Boolean(data.available),
             checked: true,
-            model: data.model || 'gemma3:270m'
+            model: 'gemma4:e2b'
           });
         }
       })
@@ -169,7 +169,7 @@ export default function App() {
 
     try {
       if (aiMode === 'local') {
-        // Local Mode: Gemma 3 (270M) via Ollama
+        // Local Mode: Gemma 4 (E2B) via Ollama
         const response = await apiFetch(`${API_BASE_URL}/api/local-chat`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -181,14 +181,14 @@ export default function App() {
 
         const data = await response.json();
         if (!response.ok || !data.success) {
-          throw new Error(data.message || 'Local AI unavailable. Please ensure Ollama is running with gemma3:270m.');
+          throw new Error(data.message || 'Local AI unavailable. Please ensure Ollama is running with gemma4:e2b.');
         }
 
         const assistantMessage = {
           id: `msg_${Date.now()}_a`,
           sender: 'assistant',
           content: data.content || data.message || '',
-          modelName: data.model?.name || 'gemma3:270m',
+          modelName: 'gemma4:e2b',
           provider: 'Local Ollama',
           local: true,
           timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })

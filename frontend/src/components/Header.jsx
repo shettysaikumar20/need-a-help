@@ -53,7 +53,7 @@ export default function Header({
             className={`toggle-option ${!isOnline ? 'selected offline' : ''}`}
             onClick={() => onSelectAiMode('local')}
             aria-pressed={!isOnline}
-            title="Offline Mode: Local Gemma 3 270M via Ollama — fully offline on your device"
+            title="Offline Mode: Local Gemma 4 E2B via Ollama — fully offline on your device"
           >
             <Cpu size={14} className="toggle-icon" />
             <span className="toggle-label">Offline</span>
@@ -71,7 +71,7 @@ export default function Header({
             {isOnline 
               ? 'Gemini 2.5 Flash' 
               : localStatus.available 
-                ? 'Gemma 3 (270M)' 
+                ? 'Gemma 4 (E2B)' 
                 : 'Ollama Offline'}
           </span>
         </div>

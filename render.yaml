@@ -33,4 +33,4 @@ services:
         value: "http://127.0.0.1:11434"
 
       - key: OLLAMA_MODEL
-        value: "gemma3:270m"
+        value: "gemma4:e2b"
