@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Send, Zap, Cpu, Mic, MicOff, Sparkles, StopCircle } from 'lucide-react';
+import { Send, Zap, Cpu, Mic, MicOff, Sparkles } from 'lucide-react';
 import WelcomeSection from './WelcomeSection';
 import CodeBlock from './CodeBlock';
 import ReactMarkdown from 'react-markdown';
@@ -107,64 +107,71 @@ export default function ChatInterface({
           ) : (
             messages.map((msg) => {
               const isUser = msg.sender === 'student' || msg.sender === 'user';
-              return (
-                <div key={msg.id} className={`chatgpt-row ${isUser ? 'user-row' : 'assistant-row'}`}>
+              return isUser ? (
+                /* User Message (ChatGPT clean right-aligned bubble) */
+                <div key={msg.id} className="chatgpt-row user-row">
+                  <div className="user-bubble-container">
+                    <div className="user-bubble-content">
+                      {msg.content}
+                    </div>
+                    {msg.timestamp && (
+                      <span className="user-bubble-time">{msg.timestamp}</span>
+                    )}
+                  </div>
+                </div>
+              ) : (
+                /* Assistant Message (ChatGPT style rich markdown) */
+                <div key={msg.id} className="chatgpt-row assistant-row">
                   <div className="chatgpt-message-box">
                     <div className="chatgpt-author-header">
-                      <div className={`chatgpt-avatar ${isUser ? 'user-avatar' : 'assistant-avatar'}`}>
-                        {isUser ? 'You' : <Zap size={15} />}
+                      <div className="chatgpt-avatar assistant-avatar">
+                        <Zap size={14} />
                       </div>
-                      <span className="chatgpt-author-name">
-                        {isUser ? 'You' : 'Need A Help'}
-                      </span>
+                      <span className="chatgpt-author-name">Need A Help</span>
                       {msg.timestamp && (
                         <span className="chatgpt-timestamp">{msg.timestamp}</span>
                       )}
                     </div>
 
                     <div className="chatgpt-message-body markdown-body">
-                      {isUser ? (
-                        <p className="user-plain-text">{msg.content}</p>
-                      ) : (
-                        <ReactMarkdown
-                          remarkPlugins={[remarkGfm, remarkMath]}
-                          rehypePlugins={[rehypeKatex]}
-                          components={{
-                            code({ node, inline, className, children, ...props }) {
-                              const match = /language-(\w+)/.exec(className || '');
-                              const codeString = String(children).replace(/\n$/, '');
-                              if (!inline && match) {
-                                return (
-                                  <CodeBlock 
-                                    language={match[1]} 
-                                    value={codeString} 
-                                  />
-                                );
-                              }
+                      <ReactMarkdown
+                        remarkPlugins={[remarkGfm, remarkMath]}
+                        rehypePlugins={[rehypeKatex]}
+                        components={{
+                          code({ node, inline, className, children, ...props }) {
+                            const match = /language-(\w+)/.exec(className || '');
+                            const codeString = String(children).replace(/\n$/, '');
+                            if (!inline && match) {
                               return (
-                                <code className={className} {...props}>
-                                  {children}
-                                </code>
-                              );
-                            },
-                            a: ({ href, children, ...props }) => {
-                              const isSafe = /^https?:\/\//i.test(href || '') || /^\//.test(href || '') || /^#/.test(href || '');
-                              if (!isSafe) return <span>{children}</span>;
-                              return (
-                                <a href={href} target="_blank" rel="noopener noreferrer" {...props}>
-                                  {children}
-                                </a>
+                                <CodeBlock 
+                                  language={match[1]} 
+                                  value={codeString} 
+                                />
                               );
                             }
-                          }}
-                        >
-                          {msg.content}
-                        </ReactMarkdown>
-                      )}
+                            return (
+                              <code className={className} {...props}>
+                                {children}
+                              </code>
+                            );
+                          },
+                          a: ({ href, children, ...props }) => {
+                            const isSafe = /^https?:\/\//i.test(href || '') || /^\//.test(href || '') || /^#/.test(href || '');
+                            if (!isSafe) return <span>{children}</span>;
+                            return (
+                              <a href={href} target="_blank" rel="noopener noreferrer" {...props}>
+                                {children}
+                              </a>
+                            );
+                          }
+                        }}
+                      >
+                        {msg.content}
+                      </ReactMarkdown>
                     </div>
 
-                    {/* Metadata Pill */}
-                    {!isUser && msg.modelName && (
+                    {/* Model Metadata Pill */}
+                    {msg.modelName && (
                       <div className="chatgpt-model-tag">
                         {msg.local ? <Cpu size={12} /> : <Sparkles size={12} />}
                         <span>{msg.modelName}</span>
@@ -183,7 +190,7 @@ export default function ChatInterface({
               <div className="chatgpt-message-box">
                 <div className="chatgpt-author-header">
                   <div className="chatgpt-avatar assistant-avatar">
-                    <Zap size={15} />
+                    <Zap size={14} />
                   </div>
                   <span className="chatgpt-author-name">Need A Help</span>
                 </div>
