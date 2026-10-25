@@ -1,34 +1,54 @@
-# Need A Help — AI Assistant 🤖
+# Need A Help — Premium AI Cognitive Workspace 🤖⚡
 
-A clean, modern, and distraction-free AI conversational web application modeled after ChatGPT, featuring seamless switching between **Online Cloud AI** and **Offline Local AI**.
+[![Live Demo](https://img.shields.io/badge/Live_Demo-need--a--help.onrender.com-8b5cf6?style=for-the-badge&logo=render&logoColor=white)](https://need-a-help.onrender.com/)
+[![GitHub Repo](https://img.shields.io/badge/GitHub-shettysaikumar20%2Fneed--a--help-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/shettysaikumar20/need-a-help)
+[![Node.js](https://img.shields.io/badge/Node.js-22_LTS-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)](https://nodejs.org/)
+[![React](https://img.shields.io/badge/React-18-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://react.dev/)
+[![Gemini API](https://img.shields.io/badge/Google_Gemini-2.5_Flash-4285F4?style=for-the-badge&logo=google&logoColor=white)](https://aistudio.google.com/)
+[![Ollama](https://img.shields.io/badge/Ollama-Offline_Local_AI-000000?style=for-the-badge&logo=ollama&logoColor=white)](https://ollama.ai)
 
----
+An ultra-modern, frosted-glass AI conversational web application modeled after premium cognitive co-pilots. Features seamless switching between **Online Cloud AI** and **Offline Local AI** with an automatic multi-tier failover cascade.
 
-## ✨ Features
-
-- 💬 **ChatGPT-Style Interface**: Clean, minimalist UI focused on pure conversation, smooth message streaming, multi-turn dialogue, and chat session history.
-- 🔄 **One-Click Engine Toggle**: Effortlessly toggle between **Online** ☁️ and **Offline** 💻 models with a single button.
-- ⚡ **Online Multi-Tier AI Cascade**:
-  1. **Primary**: **Google Gemini API** (`gemini-2.5-flash` and `gemma` models) for high-speed, accurate reasoning.
-  2. **Secondary Fallback**: **Backboard API** (automatically activates if Gemini credits end or errors occur).
-  3. **Tertiary Fallback**: **OpenRouter API** (resilient failover ensures the app never stops answering).
-- 💻 **Offline Local AI**:
-  - Powered by **Gemma 4 E2B** (`gemma4:e2b`) running locally on your machine via [Ollama](https://ollama.ai).
-  - 100% private, zero internet connection required, zero cloud API costs.
-- 📋 **Syntax-Highlighted Code Blocks**: Formatted code rendering with language detection and a 1-click **Copy code** button.
-- 📐 **LaTeX Math Support**: Mathematical equations rendered with KaTeX.
-- 🎙️ **Voice Speech-to-Text**: Built-in voice input for speaking questions directly.
-- 🌓 **Dark & Light Mode**: Seamless theme switching with system preferences.
-- 🚀 **Full-Stack Deployment Ready**: Express backend serves the optimized React production build under a single unified origin on Render, Railway, or VPS.
+🌐 **Live Demo**: [https://need-a-help.onrender.com/](https://need-a-help.onrender.com/)  
+📂 **Repository**: [https://github.com/shettysaikumar20/need-a-help](https://github.com/shettysaikumar20/need-a-help)
 
 ---
 
-## 🏗️ Architecture
+## ✨ Features & Highlights
+
+### 🌌 Premium AI Workspace Interface
+- **Cosmic Glowing Orb**: Animated central sphere with pulsating violet-magenta atmospheric aura.
+- **Glassmorphic Cards**: Frosted glass prompt starters with backdrop blur (`backdrop-filter: blur(20px)`), luminous borders, and smooth lift hover animations.
+- **Floating Glassmorphic Composer**: Pill-shaped bottom dock with quick action helper chips (`Code`, `Explain`, `Reasoning`) and a vibrant neon-gradient send button.
+- **Collapsible Sidebar**: Clean session history stored in `localStorage`, persistent multi-chat sessions, and one-click session reset.
+
+### 🔄 One-Click Engine Toggle (Online ☁️ vs. Offline 💻)
+- Toggle between cloud intelligence and private local inference with zero reload.
+
+### ⚡ Online Multi-Tier AI Cascade
+Never experience downtime or quota dropouts:
+1. **Primary**: **Google Gemini API** (`gemini-2.5-flash` and `gemma` models) for blazing-fast, high-precision responses.
+2. **Secondary Fallback**: **Backboard API** (automatically shifts if Gemini credits expire or errors occur).
+3. **Tertiary Fallback**: **OpenRouter API** (seamless tertiary safety net).
+
+### 💻 Offline Local AI (`gemma4:e2b` via Ollama)
+- Powered by local open-weight models through [Ollama](https://ollama.ai).
+- **100% Private**: Runs entirely on your device with zero internet connection required and zero cloud costs.
+
+### 📋 Rich Formatting & Developer Tools
+- **Syntax-Highlighted Code Blocks**: With auto-detected language labels and a 1-click **Copy code** button with checkmark feedback.
+- **LaTeX Math Rendering**: Equations rendered inline (`$x$`) and block (`$$...$$`) via KaTeX.
+- **Microphone Voice Input**: Built-in speech-to-text for hands-free prompt dictation.
+- **Dark & Light Modes**: System-aware and manual theme switching.
+
+---
+
+## 🏗️ System Architecture
 
 ```
                        +---------------------------------------+
                        |        Need A Help Web App            |
-                       |       (React + Vite + KaTeX)          |
+                       |       (React 18 + Vite + KaTeX)       |
                        +---------------------------------------+
                                            |
                                   [ Engine Toggle ]
@@ -47,7 +67,7 @@ A clean, modern, and distraction-free AI conversational web application modeled 
             |                                                +-------------------------+
     1. Google Gemini API                                     | Local Ollama Server     |
        (gemini-2.5-flash / gemma)                            | (http://127.0.0.1:11434)|
-            | (failover)                                     | Model: gemma4:e2b       |
+            | (failover on error/429)                        | Model: gemma4:e2b       |
     2. Backboard AI                                          +-------------------------+
             | (failover)                                                  |
     3. OpenRouter API                                              [ 100% On-Device, ]
@@ -58,21 +78,21 @@ A clean, modern, and distraction-free AI conversational web application modeled 
 
 ## 🛠️ Tech Stack
 
-- **Frontend**: React 18, Vite, Lucide Icons, React Markdown, KaTeX, Remark GFM, Remark Math
-- **Backend**: Node.js, Express, CORS, Dotenv
-- **AI Engines**:
-  - Google Gemini API (`gemini-2.5-flash`, Google AI Studio)
-  - Backboard AI
-  - OpenRouter API
-  - Ollama (Local open-weight `gemma4:e2b`)
+| Layer | Technologies |
+| :--- | :--- |
+| **Frontend** | React 18, Vite, Lucide Icons, React Markdown, KaTeX, Remark GFM, Remark Math |
+| **Backend** | Node.js (v22 LTS), Express, CORS, Dotenv |
+| **Cloud AI** | Google Gemini API, Backboard AI, OpenRouter API |
+| **Local AI** | Ollama (`gemma4:e2b` / `gemma3:270m`) |
+| **Deployment** | Render (Blueprint `render.yaml`), Railway, Docker/VPS compatible |
 
 ---
 
-## 🚀 Getting Started
+## 🚀 Quickstart Guide
 
 ### 1. Prerequisites
-- Node.js 20+ installed
-- [Ollama](https://ollama.ai) installed (for Offline Local AI)
+- **Node.js**: v20 or v22 LTS
+- **Ollama** (optional, for local offline inference): [Download Ollama](https://ollama.ai)
 
 ### 2. Clone the Repository
 ```bash
@@ -80,23 +100,23 @@ git clone https://github.com/shettysaikumar20/need-a-help.git
 cd need-a-help
 ```
 
-### 3. Setup Environment Variables
-Copy `.env.example` in `backend/` to `backend/.env`:
+### 3. Configure Environment Variables
+Copy the example environment file:
 ```bash
 cp backend/.env.example backend/.env
 ```
 
-Configure your API keys in `backend/.env`:
+Edit `backend/.env` with your API keys:
 ```env
-# Primary Online AI
+# Primary Online AI - Google Gemini
 GEMINI_API_KEY=your_gemini_api_key_here
 GEMINI_MODEL=gemini-2.5-flash
 
-# Fallback Online AI Providers
+# Fallback Providers
 BACKBOARD_API_KEY=your_backboard_api_key_here
 OPENROUTER_API_KEY=your_openrouter_api_key_here
 
-# Local Offline AI
+# Local AI (Ollama)
 OLLAMA_URL=http://127.0.0.1:11434
 OLLAMA_MODEL=gemma4:e2b
 
@@ -104,71 +124,56 @@ PORT=5000
 NODE_ENV=development
 ```
 
-### 4. Setup Local Offline AI (Optional for Offline Mode)
-Download and run `gemma4:e2b` in Ollama:
-```bash
-ollama run gemma4:e2b
-```
+### 4. Run Locally
 
-### 5. Install Dependencies & Run Locally
-
-#### Run Backend:
+#### Development Mode (Frontend + Backend):
 ```bash
+# Terminal 1: Run Backend API
 cd backend
 npm install
 npm run dev
-```
 
-#### Run Frontend:
-```bash
+# Terminal 2: Run Frontend UI
 cd frontend
 npm install
 npm run dev
 ```
-Open [http://localhost:5173](http://localhost:5173) in your browser.
+Open **[http://localhost:5173](http://localhost:5173)** in your browser.
+
+#### Production Build (Unified Single Server):
+```bash
+# From repository root:
+npm install
+npm run build
+npm start
+```
+Open **[http://localhost:5000](http://localhost:5000)**.
 
 ---
 
-## 📦 Production Build & Hosting
+## ☁️ Deployment (Render / Railway / VPS)
 
-### Option A: Unified Service (Render / Railway / VPS)
-The backend is pre-configured to automatically serve the production frontend build.
+This repository includes a pre-configured **`render.yaml`** blueprint for 1-click deployment.
 
-1. Build frontend:
-   ```bash
-   cd frontend
-   npm install
-   npm run build
-   ```
-2. Start backend in production:
-   ```bash
-   cd ../backend
-   npm install
-   NODE_ENV=production npm start
-   ```
-3. Open `http://localhost:5000` — the complete application is live on a single port!
-
-### Option B: Deploying on Render
-1. Push this repository to your GitHub account.
-2. In Render, select **New Web Service** and link your repository.
-3. Use the included `render.yaml` or set:
-   - **Build Command**: `npm --prefix backend install && npm --prefix frontend install && npm --prefix frontend run build`
-   - **Start Command**: `npm --prefix backend start`
-   - **Health Check Path**: `/api/health`
-4. Add your environment variables in the Render dashboard:
-   - `GEMINI_API_KEY`: Your Gemini API key
-   - `BACKBOARD_API_KEY`: (Optional fallback)
-   - `OPENROUTER_API_KEY`: (Optional fallback)
+### Deploying on Render:
+1. Fork or push this repository to GitHub.
+2. In the [Render Dashboard](https://dashboard.render.com), click **New +** → **Blueprint** and select your repository.
+3. Add your private environment variables in the dashboard:
+   - `GEMINI_API_KEY`: Your Google Gemini API key
+   - `BACKBOARD_API_KEY`: (Optional secondary fallback)
+   - `OPENROUTER_API_KEY`: (Optional tertiary fallback)
+4. Click **Apply** — Render will automatically build the frontend and serve the unified app.
 
 ---
 
 ## 🔒 Security & Privacy
 
-- **API Keys are Server-Side Only**: Your Gemini, Backboard, and OpenRouter keys are never exposed to the client or browser.
-- **Offline Guarantee**: When switched to **Offline** mode, all requests are routed exclusively to your local Ollama instance on `127.0.0.1`. No data leaves your machine.
-- **Git Protection**: Sensitive `.env` files and caches are strictly excluded via `.gitignore`.
+- **Server-Side API Keys**: API credentials are exclusively loaded in the Node.js backend and are never sent to the browser.
+- **Offline Assurance**: In **Offline** mode, network requests are directed solely to `http://127.0.0.1:11434`. Zero data leaves your machine.
+- **Repository Safety**: `.env` and runtime data directories are strictly excluded via `.gitignore`.
 
 ---
 
 ## 📄 License
-MIT License. Free to use, modify, and distribute.
+
+This project is licensed under the **MIT License**. Free to use, modify, and distribute.
