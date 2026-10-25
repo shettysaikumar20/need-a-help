@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Send, Zap, Cpu, Mic, MicOff, Sparkles } from 'lucide-react';
+import { Send, Zap, Cpu, Mic, MicOff, Sparkles, Code2, Lightbulb, Brain } from 'lucide-react';
 import WelcomeSection from './WelcomeSection';
 import CodeBlock from './CodeBlock';
 import ReactMarkdown from 'react-markdown';
@@ -92,6 +92,11 @@ export default function ChatInterface({
       e.preventDefault();
       handleSubmit();
     }
+  };
+
+  const handleChipClick = (prefix) => {
+    setInputText(prev => prev ? `${prev} ${prefix} ` : `${prefix} `);
+    textareaRef.current?.focus();
   };
 
   return (
@@ -207,15 +212,43 @@ export default function ChatInterface({
         </div>
       </div>
 
-      {/* Docked input bar at bottom (ChatGPT style) */}
+      {/* Docked input bar at bottom (Premium Glassmorphic style) */}
       <div className="chatgpt-input-dock">
         <div className="chatgpt-input-wrapper">
+          {/* Quick tool chips above input */}
+          <div className="composer-tool-chips" role="group" aria-label="Quick prompt helpers">
+            <button
+              type="button"
+              className="composer-chip"
+              onClick={() => handleChipClick('Write code in Python/JS to')}
+            >
+              <Code2 size={13} />
+              <span>Code</span>
+            </button>
+            <button
+              type="button"
+              className="composer-chip"
+              onClick={() => handleChipClick('Explain in simple terms:')}
+            >
+              <Lightbulb size={13} />
+              <span>Explain</span>
+            </button>
+            <button
+              type="button"
+              className="composer-chip"
+              onClick={() => handleChipClick('Provide a step-by-step reasoning for:')}
+            >
+              <Brain size={13} />
+              <span>Reasoning</span>
+            </button>
+          </div>
+
           <form onSubmit={handleSubmit} className="chatgpt-input-bar">
             <textarea
               ref={textareaRef}
               rows={1}
               className="chatgpt-textarea"
-              placeholder={isLocalMode ? "Message Need A Help (Offline Gemma 4 E2B)..." : "Message Need A Help (Online Gemini)..."}
+              placeholder={isLocalMode ? "Send a message or enter a prompt (Offline Gemma 4 E2B)..." : "Send a message or enter a prompt (Online Gemini)..."}
               value={inputText}
               onChange={(e) => setInputText(e.target.value)}
               onKeyDown={handleKeyDown}

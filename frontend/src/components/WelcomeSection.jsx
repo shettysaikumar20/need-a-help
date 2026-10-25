@@ -1,59 +1,67 @@
 import React from 'react';
-import { Sparkles, Code2, Lightbulb, Compass, MessageSquare } from 'lucide-react';
+import { Code2, Compass, Sparkles, Brain, Zap } from 'lucide-react';
 
 const SUGGESTIONS = [
   {
-    icon: Lightbulb,
-    title: 'Explain a complex concept',
-    prompt: 'Explain how machine learning neural networks work using a simple everyday analogy.'
-  },
-  {
     icon: Code2,
-    title: 'Write or debug code',
-    prompt: 'Write a clean Node.js script using fetch to request an API and handle errors gracefully.'
-  },
-  {
-    icon: Sparkles,
-    title: 'Brainstorm creative ideas',
-    prompt: 'Give me 5 practical and creative project ideas using AI and modern web technologies.'
+    title: 'Explain this Code',
+    desc: 'Debug a function, explain algorithms, or optimize performance.'
   },
   {
     icon: Compass,
-    title: 'Study & summarize notes',
-    prompt: 'Summarize the core differences between synchronous and asynchronous programming.'
+    title: 'Plan a Project or Study',
+    desc: 'Create a structured roadmap, interview plan, or learning track.'
+  },
+  {
+    icon: Sparkles,
+    title: 'Brainstorm Ideas',
+    desc: 'Generate creative concepts, build systems, or explore new topics.'
   }
 ];
 
 export default function WelcomeSection({ onSendMessage, isLocalMode }) {
   return (
-    <div className="chatgpt-welcome-container">
-      <div className="welcome-hero">
-        <div className="welcome-avatar-glow">
-          <MessageSquare size={36} className="welcome-avatar-icon" />
+    <div className="premium-welcome-wrapper">
+      {/* Central Cosmic Glowing Orb */}
+      <div className="cosmic-orb-container">
+        <div className="cosmic-orb-outer-glow"></div>
+        <div className="cosmic-orb-sphere">
+          <div className="cosmic-orb-inner-swirl"></div>
+          <Zap size={28} className="cosmic-orb-icon" />
         </div>
-        <h2 className="welcome-heading">How can I help you today?</h2>
-        <p className="welcome-subtext">
-          {isLocalMode 
-            ? 'Running locally with Gemma 4 (E2B) via Ollama — fully offline and private.'
-            : 'Powered by Google Gemini with resilient auto-failover to Backboard and OpenRouter.'}
-        </p>
       </div>
 
-      <div className="suggestions-grid" role="group" aria-label="Prompt suggestions">
+      {/* Hero Typography */}
+      <div className="premium-welcome-hero">
+        <h2 className="premium-hero-heading">Welcome to your cognitive co-pilot</h2>
+        <p className="premium-hero-subheading">
+          I am <strong>Need A Help</strong>. You can ask me to write, code, plan, or explore any idea.
+        </p>
+        <span className="premium-engine-badge">
+          {isLocalMode 
+            ? '💻 Offline Mode Active • Gemma 4 (E2B) running locally via Ollama'
+            : '☁️ Online Mode Active • Gemini 2.5 Flash with Backboard & OpenRouter Failover'}
+        </span>
+      </div>
+
+      {/* 3 Horizontal Glass Cards (As seen in workspace preview) */}
+      <div className="premium-cards-grid" role="group" aria-label="Quick start prompts">
         {SUGGESTIONS.map((s, idx) => {
           const Icon = s.icon;
           return (
             <button
               key={idx}
               type="button"
-              className="chatgpt-suggestion-card"
-              onClick={() => onSendMessage && onSendMessage(s.prompt)}
+              className="premium-glass-card"
+              onClick={() => onSendMessage && onSendMessage(`${s.title}: ${s.desc}`)}
             >
-              <div className="card-top">
-                <span className="card-title">{s.title}</span>
-                <Icon size={16} className="card-icon" />
+              <div className="glass-card-header">
+                <div className="glass-card-icon-pill">
+                  <Icon size={16} />
+                </div>
+                <span className="glass-card-title">{s.title}</span>
               </div>
-              <p className="card-prompt">{s.prompt}</p>
+              <p className="glass-card-desc">{s.desc}</p>
             </button>
           );
         })}
